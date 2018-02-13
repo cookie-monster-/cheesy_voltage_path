@@ -276,7 +276,7 @@ function addPoint() {
 		+"<td><input value='"+(prev.x+20)+"'></td>"
 		+"<td><input value='"+(prev.y+20)+"'></td>"
 		+"<td><input value='0'></td>"
-		+"<td class='comments'><input placeholder='Comments'></td>"
+		//+"<td class='comments'><input placeholder='Comments'></td>"
 		+"<td><button onclick='$(this).parent().parent().remove();update()'>Delete</button></td></tr>"
 	);
 	update();
