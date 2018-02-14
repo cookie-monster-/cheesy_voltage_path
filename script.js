@@ -2,10 +2,10 @@ var waypoints = [];
 var ctx;
 var width = 1656; //pixels
 var height = 823; //pixels
-var fieldWidth = 652; // in inches
-var fieldHeight = 324; // in inches
-var robotWidth = 30;//35.45; //inches
-var robotHeight = 30;//33.325; //inches
+var fieldWidth = 54*12; // 648 in inches 652
+var fieldHeight = 27*12; // 324 in inches 
+var robotWidth = 35;//12;//35.45; //inches 33 x 28 = 40 x 35
+var robotHeight = 40;//12;//33.325; //inches
 var pointRadius = 5;
 var turnRadius = 30;
 var kEpsilon = 1E-9;
@@ -89,7 +89,7 @@ class Waypoint {
 	constructor(position, angle, comment) {
 		this.position = position;
 		//this.speed = speed;
-		this.angle = angle;
+		this.angle = -angle;
 		this.comment = comment;
 	}
 
@@ -99,7 +99,7 @@ class Waypoint {
 
 	toString() {
 		//var comment = (this.comment.length > 0) ? " //" + this.comment : "";
-		return "new Waypoint("+this.position.x+","+this.position.y+","+this.angle+"),";// + comment;
+		return "new Waypoint("+this.position.x/12+","+this.position.y/12+","+this.angle+"),";// + comment;
 	}
 }
 
@@ -271,10 +271,10 @@ function addPoint() {
 	if(waypoints.length > 0)
 		prev = waypoints[waypoints.length - 1].position;
 	else 
-		prev = new Translation2d(50, 50);
+		prev = new Translation2d(5, 5);
 	$("tbody").append("<tr>"
-		+"<td><input value='"+(prev.x+20)+"'></td>"
-		+"<td><input value='"+(prev.y+20)+"'></td>"
+		+"<td><input value='"+((prev.x/12)+2)+"'></td>"
+		+"<td><input value='"+((prev.y/12)+2)+"'></td>"
 		+"<td><input value='0'></td>"
 		//+"<td class='comments'><input placeholder='Comments'></td>"
 		+"<td><button onclick='$(this).parent().parent().remove();update()'>Delete</button></td></tr>"
@@ -293,9 +293,9 @@ function addPoint() {
 function update() {
 	waypoints = [];
 	$('tbody').children('tr').each(function () {
-        var x = parseInt( $($($(this).children()).children()[0]).val() );
+        var x = parseInt( $($($(this).children()).children()[0]).val()*12 );
         console.log(x);
-        var y = parseInt( $($($(this).children()).children()[1]).val() );
+        var y = parseInt( $($($(this).children()).children()[1]).val()*12 );
         var angle = parseInt( $($($(this).children()).children()[2]).val() );
         //var speed = parseInt( $($($(this).children()).children()[3]).val() );
         if(isNaN(angle)){ //|| isNaN(speed)) {
