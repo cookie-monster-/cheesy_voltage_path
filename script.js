@@ -99,7 +99,7 @@ class Waypoint {
 
 	toString() {
 		//var comment = (this.comment.length > 0) ? " //" + this.comment : "";
-		return "new Waypoint("+this.position.x/12+","+this.position.y/12+","+this.angle+"),";// + comment;
+		return "new Waypoint("+this.position.x/12+","+this.position.y/12+", Pathfinder.d2r("+(-1*this.angle)+")),";// + comment;
 	}
 }
 
@@ -421,8 +421,12 @@ function importData() {
 
 function getDataString() {
 	var str = "" //0, 0, 0),
+	var sPosX = waypoints[0].position.x/12;
+	var sPosY = waypoints[0].position.y/12;
+	var sHdg = -1 * waypoints[0].angle;
 	for(var i=0; i<waypoints.length; i++) {
-		str += "" + waypoints[i].toString() + "\n";
+		var point = "new Waypoint("+((waypoints[i].position.x/12)-sPosX)+","+((waypoints[i].position.y/12)-sPosY)+", Pathfinder.d2r("+((-1*waypoints[i].angle)-sHdg)+")),";
+		str += "" + point + "\n";
 		//str += " " + i + "\n";
 	}
 	return str;
